@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora JavaScript</title>
+  <style>
+    input[type="text"] {
+      width: 150px;
+      margin: 5px;
+      padding: 5px;
+    }
+    button {
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Calculadora JavaScript</h2>
+  <input type="text" id="resultado" disabled>
+  <br>
+  <button onclick="adicionar(1)">1</button>
+  <button onclick="adicionar(2)">2</button>
+  <button onclick="adicionar(3)">3</button>
+  <button onclick="operacao('+')">+</button>
+  <br>
+  <button onclick="adicionar(4)">4</button>
+  <button onclick="adicionar(5)">5</button>
+  <button onclick="adicionar(6)">6</button>
+  <button onclick="operacao('-')">-</button>
+  <br>
+  <button onclick="adicionar(7)">7</button>
+  <button onclick="adicionar(8)">8</button>
+  <button onclick="adicionar(9)">9</button>
+  <button onclick="operacao('*')">*</button>
+  <br>
+  <button onclick="adicionar(0)">0</button>
+  <button onclick="limpar()">C</button>
+  <button onclick="calcular()">=</button>
+  <button onclick="operacao('/')">/</button>
+
+  <script>
+    let resultado = document.getElementById('resultado');
+    let operando1 = '';
+    let operando2 = '';
+    let operacaoAtual = '';
+
+    function adicionar(numero) {
+      if (operacaoAtual === '') {
+        operando1 += numero;
+        resultado.value = operando1;
+      } else {
+        operando2 += numero;
+        resultado.value = operando2;
+      }
+    }
+
+    function operacao(op) {
+      if (operando1 !== '') {
+        operacaoAtual = op;
+        resultado.value = '';
+      }
+    }
+
+    function calcular() {
+      let resultadoFinal;
+      switch (operacaoAtual) {
+        case '+':
+          resultadoFinal = parseFloat(operando1) + parseFloat(operando2);
+          break;
+        case '-':
+          resultadoFinal = parseFloat(operando1) - parseFloat(operando2);
+          break;
+        case '*':
+          resultadoFinal = parseFloat(operando1) * parseFloat(operando2);
+          break;
+        case '/':
+          resultadoFinal = parseFloat(operando1) / parseFloat(operando2);
+          break;
+      }
+      resultado.value = resultadoFinal;
+      operando1 = resultadoFinal.toString();
+      operando2 = '';
+      operacaoAtual = '';
+    }
+
+    function limpar() {
+      operando1 = '';
+      operando2 = '';
+      operacaoAtual = '';
+      resultado.value = '';
+    }
+  </script>
+</body>
+</html>
